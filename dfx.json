@@ -1,0 +1,26 @@
+{
+  "canisters": {
+    "clinqna_backend": {
+      "main": "src/clinqna_backend/main.mo",
+      "type": "motoko"
+    },
+    "clinqna_frontend": {
+      "dependencies": [
+        "clinqna_backend"
+      ],
+      "source": [
+        "src/clinqna_frontend/dist"
+      ],
+      "type": "assets",
+      "workspace": "clinqna_frontend"
+    }
+  },
+  "defaults": {
+    "build": {
+      "args": "",
+      "packtool": ""
+    }
+  },
+  "output_env_file": ".env",
+  "version": 1
+}
