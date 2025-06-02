@@ -1,30 +1,22 @@
-import { useState } from 'react';
-import { clinqna_backend } from 'declarations/clinqna_backend';
+import React, { useState } from "react";
+import { useAuth } from "./auth/AuthProvider";
+import BackendFunctionsUI from "./components/BackendFunctionsUI";
 
 function App() {
-  const [greeting, setGreeting] = useState('');
-
-  function handleSubmit(event) {
-    event.preventDefault();
-    const name = event.target.elements.name.value;
-    clinqna_backend.greet(name).then((greeting) => {
-      setGreeting(greeting);
-    });
-    return false;
-  }
+  const { isAuthenticated, login, logout } = useAuth();
 
   return (
-    <main>
-      <img src="/logo2.svg" alt="DFINITY logo" />
-      <br />
-      <br />
-      <form action="#" onSubmit={handleSubmit}>
-        <label htmlFor="name">Enter your name: &nbsp;</label>
-        <input id="name" alt="Name" type="text" />
-        <button type="submit">Click Me!</button>
-      </form>
-      <section id="greeting">{greeting}</section>
-    </main>
+    <div style={{ padding: 24 }}>
+      <h1>CliniQ&A</h1>
+      <div style={{ marginBottom: 24 }}>
+        {isAuthenticated ? (
+          <button onClick={logout}>Logout</button>
+        ) : (
+          <button onClick={login}>Login</button>
+        )}
+      </div>
+      <BackendFunctionsUI />
+    </div>
   );
 }
 
